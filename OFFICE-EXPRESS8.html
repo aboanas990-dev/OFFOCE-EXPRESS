@@ -4668,10 +4668,27 @@ function mdToHtml(md){
   }
   fl();cl();if(code)out+='</pre>';return out||'<p><br></p>';
 }
+/* تنقية HTML المستورد بقائمة سماح: وسوم وخصائص التنسيق فقط، والروابط http/https/mailto والصور data/http فقط.
+   ما عدا ذلك يُحذف (وسوم خطرة) أو يُفك مع إبقاء نصه (وسوم غير معروفة). */
+const CLEAN_TAGS=new Set('P BR B STRONG I EM U S STRIKE SUB SUP SPAN DIV H1 H2 H3 H4 H5 H6 UL OL LI TABLE THEAD TBODY TFOOT TR TD TH CAPTION COLGROUP COL IMG A BLOCKQUOTE PRE CODE HR FONT MARK SMALL BIG FIGURE FIGCAPTION CENTER'.split(' '));
+const CLEAN_DROP='script,style,meta,link,title,base,iframe,frame,frameset,object,embed,applet,svg,math,form,input,button,textarea,select,option,template,noscript,audio,video,source,track,canvas,portal';
+const CLEAN_ATTRS=new Set('style class colspan rowspan align dir lang width height src href alt title color face size border cellpadding cellspacing valign start type'.split(' '));
 function cleanHtml(html){
   const d=new DOMParser().parseFromString(html,'text/html');
-  $$('script,style,meta,link,title,iframe,object,embed',d).forEach(x=>x.remove());
-  $$('*',d.body).forEach(e=>{[...e.attributes].forEach(a=>{if(/^on/i.test(a.name)||(a.name==='href'&&/^\s*javascript:/i.test(a.value)))e.removeAttribute(a.name)})});
+  $$(CLEAN_DROP,d).forEach(x=>x.remove());
+  const url=v=>String(v).replace(/[\u0000-\u0020\u007f-\u009f]/g,'').toLowerCase();
+  [...d.body.querySelectorAll('*')].reverse().forEach(e=>{
+    if(!CLEAN_TAGS.has(e.tagName)){e.replaceWith(...e.childNodes);return}
+    [...e.attributes].forEach(a=>{
+      const n=a.name.toLowerCase(),v=url(a.value);
+      const bad=!CLEAN_ATTRS.has(n)
+        ||(n==='href'&&!(e.tagName==='A'&&/^(https?:|mailto:|#)/.test(v)))
+        ||(n==='src'&&!(e.tagName==='IMG'&&/^(data:image\/(png|jpe?g|gif|webp|bmp);|https?:|blob:)/.test(v)))
+        ||(n==='style'&&/expression\(|javascript:|behavior:|-moz-binding|url\(/.test(v));
+      if(bad)e.removeAttribute(a.name);
+    });
+    if(e.tagName==='A'&&e.getAttribute('href'))e.setAttribute('rel','noopener noreferrer');
+  });
   return d.body.innerHTML||'<p><br></p>';
 }
 function rtfToText(r){return r.replace(/\\par[d]?/g,'\n').replace(/\\'([0-9a-f]{2})/gi,(m,h)=>String.fromCharCode(parseInt(h,16))).replace(/\\u(-?\d+)\??/g,(m,n)=>String.fromCharCode(n<0?65536+ +n:+n)).replace(/\{\\\*[^{}]*\}/g,'').replace(/\\[a-z]+-?\d* ?/gi,'').replace(/[{}]/g,'')}
