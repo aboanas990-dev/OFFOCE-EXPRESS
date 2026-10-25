@@ -37,6 +37,7 @@ body[data-app="forms"]{--appc:var(--forms)}
 .logo{font-weight:800;letter-spacing:1px;font-size:17px;display:flex;align-items:center;gap:8px;cursor:pointer;white-space:nowrap;direction:ltr}
 .logo-img{width:30px;height:30px;border-radius:7px;display:block;box-shadow:0 0 0 1px rgba(255,255,255,.35)}
 .apptabs{display:flex;gap:4px}
+@media (max-width:760px){.apptabs{overflow-x:auto;max-width:100%;min-width:0;scrollbar-width:none;-webkit-overflow-scrolling:touch}.apptabs::-webkit-scrollbar{display:none}.apptabs button{flex:none}}
 .apptabs button{background:rgba(255,255,255,.12);border:0;color:#fff;padding:6px 12px;border-radius:8px}
 .apptabs button.on{background:#fff;color:var(--appc);font-weight:700}
 .docname{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:#fff;border-radius:8px;padding:5px 10px;min-width:120px;max-width:260px;flex:1}
@@ -4440,7 +4441,7 @@ function applyI18n(){
 }
 /* lazy libraries: embedded <script type="text/x-lib"> blocks, CDN fallback */
 const LIBURL={
-  xlsx:'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js',
+  xlsx:'https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js',
   jszip:'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js',
   mammoth:'https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js',
   pptx:'https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js',
