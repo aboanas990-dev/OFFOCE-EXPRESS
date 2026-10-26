@@ -1066,6 +1066,23 @@ table.grid td.x2-hasf{padding-inline-end:22px}
 }
 
 </style>
+<!-- HA-BRAND round4 2026-10-25: accent + Tajawal + About (no layout changes) -->
+<meta name="author" content="Hassan Alfaifi">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap">
+<style id="ha-brand">
+:root{--ha-navy:#0a1f44;--ha-gold:#c9a227;--ha-font:'Tajawal',system-ui,-apple-system,'Segoe UI',Tahoma,Arial,sans-serif;accent-color:#c9a227}
+body{font-family:var(--ha-font)}
+.ha-badge{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:#0a1f44;color:#c9a227;font:700 11px/1 var(--ha-font);letter-spacing:.5px;border:1px solid #c9a227;flex:none;box-sizing:border-box}
+#ha-about-btn{position:fixed;left:10px;bottom:10px;z-index:2147483000;cursor:pointer;padding:0;box-shadow:0 2px 8px rgba(0,0,0,.25);opacity:.8}
+#ha-about-btn:hover,#ha-about-btn:focus-visible{opacity:1;outline:2px solid #c9a227;outline-offset:2px}
+#ha-about{border:1px solid #c9a227;border-radius:12px;background:#0a1f44;color:#fff;font-family:var(--ha-font);max-width:min(360px,90vw);padding:20px;text-align:center}
+@media print{#ha-about-btn{display:none}}
+#ha-about::backdrop{background:rgba(10,31,68,.55)}
+#ha-about h2{margin:10px 0 4px;color:#c9a227;font-size:18px}
+#ha-about p{margin:6px 0;font-size:14px;color:#fff}
+#ha-about button{margin-top:12px;background:#c9a227;color:#0a1f44;border:0;border-radius:8px;padding:6px 18px;font:700 14px var(--ha-font);cursor:pointer}
+</style>
 </head>
 <body data-app="home">
 <header class="topbar">
@@ -13021,5 +13038,9 @@ return FM;
 
 init();ADV.initAdv();OE_ANIM.splash();OE_ANIM.enterApp(CUR);
 </script>
+<!-- HA-BRAND round4: About -->
+<button type="button" id="ha-about-btn" class="ha-badge" title="حول · About" aria-label="حول التطبيق · About">HA</button>
+<dialog id="ha-about" dir="rtl" lang="ar" aria-labelledby="ha-about-t"><span class="ha-badge" style="width:48px;height:48px;font-size:17px">HA</span><h2 id="ha-about-t">OFFICE EXPRESS</h2><p>تطوير حسن الفيفي · Developed by Hassan Alfaifi</p><p>© 2026 حسن الفيفي · Hassan Alfaifi</p><form method="dialog"><button>إغلاق · Close</button></form></dialog>
+<script>(function(){var b=document.getElementById('ha-about-btn'),d=document.getElementById('ha-about');if(!b||!d)return;b.addEventListener('click',function(){if(d.showModal)d.showModal();else d.setAttribute('open','');});})();</script>
 </body>
 </html>
