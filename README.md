@@ -47,3 +47,14 @@ Ctrl+S حفظ · Ctrl+Z / Ctrl+Y تراجع / إعادة · Ctrl+B / I / U غا�
 | `OFFICE-EXPRESS6.html` | نسخة سابقة |
 
 © 2026 حسن الفيفي · Hassan Alfaifi — جميع الحقوق محفوظة
+
+<!-- replica-2026-11-06 -->
+## الاختصارات الجديدة
+
+- **Ctrl+Shift+K**: لوحة الأوامر، ابحث فيها عن صفحة أو زر أو صف في جدول ظاهر، ثم اضغط Enter.
+- الرسائل تظهر الآن إشعارًا لا يوقف العمل بدل نافذة المتصفح.
+
+## New shortcuts
+
+- **Ctrl+Shift+K**: command palette. Search visible pages, buttons and table rows, then press Enter.
+- Messages now appear as a non-blocking toast instead of a browser dialog.
